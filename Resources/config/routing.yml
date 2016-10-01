@@ -1,3 +1,0 @@
-hygrid_jwt_homepage:
-    path:     /
-    defaults: { _controller: HygridJWTBundle:Default:index }

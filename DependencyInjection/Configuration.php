@@ -20,6 +20,22 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('hygrid_jwt');
 
+        $rootNode
+            ->children()
+                ->scalarNode('issuer')->end()
+                ->integerNode('usage_delay')->defaultNull()->end()
+                ->integerNode('token_expiry')->defaultValue(120)->end()
+                ->scalarNode('jti_claim')->defaultNull()->end()
+                ->arrayNode('signing')
+                    ->children()
+                        ->integerNode('signer')->defaultValue('hygrid_jwt.signers.sha256')->end()
+                        ->scalarNode('public_key')->end()
+                        ->scalarNode('private_key')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

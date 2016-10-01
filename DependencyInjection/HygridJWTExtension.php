@@ -22,6 +22,13 @@ class HygridJWTExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('hygrid_jwt.signing.public_key', $config['signing']['public_key']);
+        $container->setParameter('hygrid_jwt.signing.private_key', $config['signing']['private_key']);
+        $container->setParameter('hygrid_jwt.signing.signer', $config['signing']['private_key']);
+        $container->setParameter('hygrid_jwt.issuer', $config['issuer']);
+        $container->setParameter('hygrid_jwt.token_expiry', $config['token_expiry']);
+
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -1,4 +1,29 @@
 services:
-#    hygrid_jwt.example:
-#        class: Hygrid\JWTBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    hygrid_jwt.signers.sha256:
+        class: Lcobucci\JWT\Signer\Rsa\Sha256
+    hygrid_jwt.signer:
+        alias: 'hygrid_jwt.signers.sha256'
+    hygrid_jwt.configuration:
+        class: Lcobucci\JWT\Configuration
+    hygrid_jwt.keys.public:
+        class: Lcobucci\JWT\Signer\Key
+        arguments: ['%hygrid_jwt.signing.public_key%']
+    hygrid_jwt.keys.private:
+        class: Lcobucci\JWT\Signer\Key
+        arguments: ['%hygrid_jwt.signing.private_key%']
+    hygrid_jwt.parser:
+        class: Hygrid\JWTBundle\WebTokenParser
+        arguments:
+            - '@hygrid_jwt.configuration'
+            - '@hygrid_jwt.signer'
+            - '@hygrid_jwt.keys.public'
+    hygrid_jwt.issuer:
+        class: Hygrid\JWTBundle\WebTokenIssuer
+        arguments:
+            - '@hygrid_jwt.configuration'
+            - '@hygrid_jwt.signer'
+            - '@hygrid_jwt.keys.private'
+            - '%hygrid_jwt.issuer%'
+            - '%hygrid_jwt.token_expiry%'
+
+
