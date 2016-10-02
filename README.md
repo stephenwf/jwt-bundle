@@ -37,4 +37,5 @@ $token = $parser->parse($token_as_string); // Will throw exception if not valid 
 
 ### Note
 Configuration is sparse, use at own risk (or fork).
+
 Built using [https://github.com/lcobucci/jwt](https://github.com/lcobucci/jwt)
