@@ -28,7 +28,6 @@ class HygridJWTExtension extends Extension
         $container->setParameter('hygrid_jwt.issuer', $config['issuer']);
         $container->setParameter('hygrid_jwt.token_expiry', $config['token_expiry']);
 
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

@@ -2,7 +2,6 @@
 
 namespace Hygrid\JWTBundle;
 
-
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
@@ -39,10 +38,9 @@ class WebTokenIssuer
         foreach ($payload as $name => $item) {
             $this->builder->with($name, $item);
         }
-        
+
         $this->builder->sign($this->signer,  $this->private_key);
 
         return $this->builder->getToken();
     }
-
 }

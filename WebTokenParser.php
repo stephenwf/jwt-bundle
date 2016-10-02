@@ -2,7 +2,6 @@
 
 namespace Hygrid\JWTBundle;
 
-
 use Exception;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
@@ -29,10 +28,9 @@ class WebTokenParser
     {
         $token = $this->parser->parse($hash);
         if (!$token->verify($this->signer, $this->public_key)) {
-            throw new Exception("Not verified.");
+            throw new Exception('Not verified.');
         }
+
         return $token;
     }
-
-
 }
