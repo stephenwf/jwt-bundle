@@ -5,7 +5,7 @@ $ openssl genrsa -out your_private.key 2048
 
 Extracting public key
 ```bash
-openssl rsa -pubout -in your_private.key -out your_public.key
+$ openssl rsa -pubout -in your_private.key -out your_public.key
 ```
 
 
