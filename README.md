@@ -1,3 +1,5 @@
+# JSON WebToken Bundle
+
 Creating a key:
 ```bash
 $ openssl genrsa -out your_private.key 2048
@@ -32,3 +34,7 @@ Token consumer:
 $parser = $this->get('hygrid_jwt.parser');
 $token = $parser->parse($token_as_string); // Will throw exception if not valid signature.
 ```
+
+### Note
+Configuration is sparse, use at own risk (or fork).
+Built using [https://github.com/lcobucci/jwt](https://github.com/lcobucci/jwt)
