@@ -15,6 +15,20 @@ hygrid_jwt:
     issuer: https://yourdomain.com
     token_expiry: 60
     signing:
-        public_key: 'file://%kernel.root_dir%/ssh/your_public.key'
-        private_key: 'file://%kernel.root_dir%/ssh/your_private.key'
+        public_key: 'file://%kernel.root_dir%/ssh/your_public.key' # only needed for service using tokens.
+        private_key: 'file://%kernel.root_dir%/ssh/your_private.key' # only needed for service issuing tokens.
+```
+
+Usage:
+```php
+$issuer = $this->get('hygrid_jwt.issuer');
+$token = $issuer->getToken(['testing' => 'awesome']);
+
+// Pass token to back in response
+```
+
+Token consumer:
+```php
+$parser = $this->get('hygrid_jwt.parser');
+$token = $parser->parse($token_as_string); // Will throw exception if not valid signature.
 ```
