@@ -1,0 +1,6 @@
+{
+  "name": "Jwt-bundle",
+  "tagline": "JSON WebToken Bundle for Symfony 3",
+  "body": "# JSON WebToken Bundle\r\n\r\nCreating a key:\r\n```bash\r\n$ openssl genrsa -out your_private.key 2048\r\n```\r\n\r\nExtracting public key\r\n```bash\r\n$ openssl rsa -pubout -in your_private.key -out your_public.key\r\n```\r\n\r\n\r\nExample config\r\n```yaml\r\nhygrid_jwt:\r\n    issuer: https://yourdomain.com\r\n    token_expiry: 60\r\n    signing:\r\n        public_key: 'file://%kernel.root_dir%/ssh/your_public.key' # only needed for service using tokens.\r\n        private_key: 'file://%kernel.root_dir%/ssh/your_private.key' # only needed for service issuing tokens.\r\n```\r\n\r\nUsage:\r\n```php\r\n$issuer = $this->get('hygrid_jwt.issuer');\r\n$token = $issuer->getToken(['testing' => 'awesome']);\r\n\r\n// Pass token to back in response\r\n```\r\n\r\nToken consumer:\r\n```php\r\n$parser = $this->get('hygrid_jwt.parser');\r\n$token = $parser->parse($token_as_string); // Will throw exception if not valid signature.\r\n```\r\n\r\n### Note\r\nConfiguration is sparse, use at own risk (or fork).\r\n\r\nBuilt using [https://github.com/lcobucci/jwt](https://github.com/lcobucci/jwt)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

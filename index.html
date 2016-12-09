@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jwt-bundle by stephenwf</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jwt-bundle</h1>
+        <p>JSON WebToken Bundle for Symfony 3</p>
+
+        <p class="view"><a href="https://github.com/stephenwf/jwt-bundle">View the Project on GitHub <small>stephenwf/jwt-bundle</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/stephenwf/jwt-bundle/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/stephenwf/jwt-bundle/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/stephenwf/jwt-bundle">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="json-webtoken-bundle" class="anchor" href="#json-webtoken-bundle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSON WebToken Bundle</h1>
+
+<p>Creating a key:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ openssl genrsa -out your_private.key 2048</pre></div>
+
+<p>Extracting public key</p>
+
+<div class="highlight highlight-source-shell"><pre>$ openssl rsa -pubout -in your_private.key -out your_public.key</pre></div>
+
+<p>Example config</p>
+
+<div class="highlight highlight-source-yaml"><pre><span class="pl-ent">hygrid_jwt:</span>
+    <span class="pl-ent">issuer:</span> <span class="pl-s">https://yourdomain.com</span>
+    <span class="pl-ent">token_expiry:</span> <span class="pl-c1">60</span>
+    <span class="pl-ent">signing:</span>
+        <span class="pl-ent">public_key:</span> <span class="pl-s"><span class="pl-pds">'</span>file://%kernel.root_dir%/ssh/your_public.key<span class="pl-pds">'</span></span> <span class="pl-c"># only needed for service using tokens.</span>
+        <span class="pl-ent">private_key:</span> <span class="pl-s"><span class="pl-pds">'</span>file://%kernel.root_dir%/ssh/your_private.key<span class="pl-pds">'</span></span> <span class="pl-c"># only needed for service issuing tokens.</span></pre></div>
+
+<p>Usage:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$issuer</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>hygrid_jwt.issuer<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$token</span> <span class="pl-k">=</span> <span class="pl-smi">$issuer</span><span class="pl-k">-&gt;</span>getToken([<span class="pl-s"><span class="pl-pds">'</span>testing<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>awesome<span class="pl-pds">'</span></span>]);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Pass token to back in response</span></span></pre></div>
+
+<p>Token consumer:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$parser</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>hygrid_jwt.parser<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$token</span> <span class="pl-k">=</span> <span class="pl-smi">$parser</span><span class="pl-k">-&gt;</span>parse(<span class="pl-smi">$token_as_string</span>); <span class="pl-c">// Will throw exception if not valid signature.</span></span></pre></div>
+
+<h3>
+<a id="note" class="anchor" href="#note" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note</h3>
+
+<p>Configuration is sparse, use at own risk (or fork).</p>
+
+<p>Built using <a href="https://github.com/lcobucci/jwt">https://github.com/lcobucci/jwt</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/stephenwf">stephenwf</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
